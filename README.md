@@ -1,7 +1,7 @@
 # everBuild
-
-# MVP List
-## Data organization
+A tool to help tabletop world builders organize their imagination
+## MVP List
+### Data organization
 * Oranized from least specific to most specific
 * Aim is to organize the many threads of world building from a tabletop RPG, allowing GMs to keep their thoughts in a single place
 * Provides tracking for:
@@ -19,16 +19,16 @@
     * Database holding items for purchase within a shop, joined by a joins table to show a Shop's inventory
 * Site should be searchable by name, finding all relevant bits of data
   * A stretch goal is to add tags that can be applied to database entries as well, aiding in finding or organizing data
-## Site is presented in an inviting and clear way
+### Site is presented in an inviting and clear way
 * Goal is to provide intuitive and easy to understand organization through react components
 * Interface should be easy to navigate and quick to understand
 * Adding content should have clear methods and interfaces for accomplishing that goal
 * Finding data that's been created by a user should be a prompt and painless experience, data should be organized and clear to access
 
-# Bonus Goals
+## Bonus Goals
 * Rich Text Editing
 * Auto save
 * Addding pictures to entries
 
-# Database schema
+## Database schema
 ![Database Schema](https://github.com/edenspring/everBuild/blob/main/Everbuild.png)
