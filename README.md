@@ -1,3 +1,3 @@
 # everBuild
 
-![Database Schema](https://github.com/edenspring/goodEats/blob/main/goodEatsDBSchema.png)
+![Database Schema](https://github.com/edenspring/everBuild/blob/main/Everbuild.png)
