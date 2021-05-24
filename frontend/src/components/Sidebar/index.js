@@ -1,16 +1,16 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SideBarLand from "../SideBarComponents/SideBarLand";
+import './Sidebar.css'
 
 function SideBar() {
   const sessionUser = useSelector((state) => state.session.user);
-
   let sideBarContent;
+
   if (sessionUser) {
     sideBarContent = (
       <>
-        <SideBarLand />
+        <SideBarLand lands={[]} />
       </>
     );
   } else {
@@ -21,7 +21,7 @@ function SideBar() {
     );
   }
   return (
-    <div>
+    <div className='sidebar'>
       <h2>Sidebar</h2>
       { sideBarContent }
     </div>

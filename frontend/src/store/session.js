@@ -1,4 +1,6 @@
 import {csrfFetch} from './csrf';
+import {getUserLands} from './land'
+
 
 const SET_USER = 'session/setUser'
 const REMOVE_USER = 'session/removeUser'
@@ -35,6 +37,7 @@ export const restoreUser = () => async dispatch => {
   const response = await csrfFetch('/api/session');
   const data = await response.json();
   dispatch(setUser(data.user));
+  dispatch(getUserLands(data.user.id));
   return response;
 }
 

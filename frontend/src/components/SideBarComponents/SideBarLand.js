@@ -1,19 +1,36 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import * as landActions from '../../store/land'
-
-function SideBarLand(){
-
+import * as landActions from "../../store/land";
+import "./SideBarComponents.css";
+function SideBarLand() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const userLands = Array.from(dispatch(landActions.getUserLands(sessionUser.id)))
-  console.log(userLands)
+  const [userLands, setUserLands] = useState([]);
+  // console.log(sessionUser);
+  useEffect(() => {
+    dispatch(landActions.getUserLands(sessionUser.id)).then((data) =>
+      setUserLands(data.lands)
+    );
+    console.log(userLands);
+  }, [dispatch, sessionUser.id, userLands]);
 
-  return(
-    <>
-    {userLands.forEach((e,i) => <NavLink to={`/lands/e.id`} key={i} />)}
-    </>
-  )
+  // const userLands = useSelector((state) => state.land.userLands)
+
+  console.log(userLands);
+
+  return (
+    <div className="userlands__div">
+      {userLands.map((e, i) =>
+        <div className='individual__land'>
+          <NavLink to={`/lands/${e.id}`} key={i}>
+            {" "}
+            {e.name}{" "}
+          </NavLink>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default SideBarLand;
