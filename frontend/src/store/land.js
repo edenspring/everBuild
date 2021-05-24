@@ -21,6 +21,7 @@ const setUserLands = (userLands) => {
 const deleteLand = () => {
   return {
     type: DELETE_LAND,
+    payload: null,
   };
 };
 
@@ -73,7 +74,7 @@ export const deleteCurrentLand = (landId) => async (dispatch) => {
   const response = await csrfFetch(`/api/lands/${landId}/delete`, {
     method: "DELETE",
   });
-  dispatch(deleteLand);
+  dispatch(deleteLand());
 };
 
 const initialState = { land: null };
@@ -92,7 +93,7 @@ const landReducer = (state = initialState, action) => {
       return newState;
     case DELETE_LAND:
       newState = Object.assign({}, state);
-      newState.land.land = null;
+      newState.land = action.payload;
       return newState;
     default:
       return state;
