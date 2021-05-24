@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const SET_LAND = "lands/setLand";
 const USER_LANDS = "lands/setUserLands";
+const DELETE_LAND = "lands/deleteLand";
 
 const setLand = (land) => {
   return {
@@ -14,6 +15,12 @@ const setUserLands = (userLands) => {
   return {
     type: USER_LANDS,
     payload: userLands,
+  };
+};
+
+const deleteLand = () => {
+  return {
+    type: DELETE_LAND,
   };
 };
 
@@ -43,7 +50,7 @@ export const updateLand = (land) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(setLand(data))
+  dispatch(setLand(data));
 };
 
 export const getLand = (landId) => async (dispatch) => {
@@ -62,6 +69,13 @@ export const getUserLands = (userId) => async (dispatch) => {
   return data;
 };
 
+export const deleteCurrentLand = (landId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/lands/${landId}/delete`, {
+    method: "DELETE",
+  });
+  dispatch(deleteLand);
+};
+
 const initialState = { land: null };
 
 const landReducer = (state = initialState, action) => {
@@ -75,6 +89,10 @@ const landReducer = (state = initialState, action) => {
     case USER_LANDS:
       newState = Object.assign({}, state);
       newState.userLands = action.payload;
+      return newState;
+    case DELETE_LAND:
+      newState = Object.assign({}, state);
+      newState.land.land = null;
       return newState;
     default:
       return state;

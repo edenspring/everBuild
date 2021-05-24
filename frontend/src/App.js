@@ -6,7 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import CreateLandFormPage from "./components/CreateLandForm";
-import SideBar from "./components/Sidebar"
+import SideBar from "./components/Sidebar";
 import Lands from "./components/Lands";
 
 function App() {

@@ -37,6 +37,10 @@ function Lands() {
     return history.push('/');
   }
 
+  const handleDelete = () => {
+    dispatch(landActions.deleteCurrentLand(currentLand.id))
+  }
+
   return (
     // <div classname="land__details">
     //   <h2> Land </h2>
@@ -63,6 +67,7 @@ function Lands() {
           />
       </label>
       <button type="submit">Save Changes</button>
+      <button onClick={handleDelete}>Delete This Land</button>
     </form>
     // </div>
   );

@@ -29,11 +29,21 @@ router.put(
   asyncHandler(async(req, res)=>{
     const id = req.params.landId;
     const {name, description} = req.body;
-    const currentLand = Land.findByPk(id);
+    const currentLand = await Land.findByPk(id);
     currentLand.name = name;
     currentLand.description = description;
     await currentLand.save();
     res.json(currentLand)
+  })
+)
+
+router.delete(
+  '/:landId/delete',
+  asyncHandler(async(req, res)=>{
+    const id = req.params.landId;
+    const landForDeleting = await Land.findByPk(id);
+    await landForDeleting.destroy();
+    res.status(200);
   })
 )
 
