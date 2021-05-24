@@ -6,6 +6,8 @@ const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const {Land} = require('../../db/models/land')
+
 const router = express.Router();
 const validateSignup = [
   check('email')
@@ -42,5 +44,20 @@ router.post(
     });
   }),
 );
+
+router.get(
+  '/:userId/lands',
+  asyncHandler(async (req, res) =>{
+    const {userId} = req.body;
+    const lands = await Land.findAll({
+      where: {
+        userId
+      }
+    })
+    res.json({
+      lands,
+  })
+  })
+)
 
 module.exports = router;
