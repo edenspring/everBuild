@@ -1,24 +1,24 @@
-import {csrfFetch} from './csrf';
+import { csrfFetch } from "./csrf";
 
-const SET_LAND = 'lands/setLand';
-const USER_LANDS = 'lands/setUserLands'
+const SET_LAND = "lands/setLand";
+const USER_LANDS = "lands/setUserLands";
 
 const setLand = (land) => {
   return {
     type: SET_LAND,
     payload: land,
-  }
-}
+  };
+};
 
 const setUserLands = (userLands) => {
   return {
     type: USER_LANDS,
     payload: userLands,
-  }
-}
+  };
+};
 
-export const createLand =  (land) => async (dispatch) => {
-  const {name, description, userId} = land;
+export const createLand = (land) => async (dispatch) => {
+  const { name, description, userId } = land;
   const response = await csrfFetch("/api/lands", {
     method: "POST",
     body: JSON.stringify({
@@ -29,24 +29,45 @@ export const createLand =  (land) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(setLand(data));
+  getUserLands(userId);
   return data;
-}
+};
 
-export const getUserLands = (userId) => async(dispatch) => {
+export const updateLand = (land) => async (dispatch) => {
+  const { currentLand, name, description } = land;
+  const response = await csrfFetch(`/api/lands/${currentLand.id}/edit`, {
+    method: "PUT",
+    body: JSON.stringify({
+      name,
+      description,
+    }),
+  });
+  const data = await response.json();
+  dispatch(setLand(data))
+};
+
+export const getLand = (landId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/lands/${landId}`);
+  const data = await response.json();
+  dispatch(setLand(data));
+  return data;
+};
+
+export const getUserLands = (userId) => async (dispatch) => {
   // const {userId} = userId
   const response = await csrfFetch(`/api/users/${userId}/lands`);
   const data = await response.json();
-  console.log('get userLands log: ', data)
-  dispatch(setUserLands(data))
+  console.log("get userLands log: ", data);
+  dispatch(setUserLands(data));
   return data;
-}
+};
 
-const initialState = {land:null}
+const initialState = { land: null };
 
 const landReducer = (state = initialState, action) => {
-  console.log('state' , state)
+  console.log("state", state);
   let newState;
-  switch(action.type){
+  switch (action.type) {
     case SET_LAND:
       newState = Object.assign({}, state);
       newState.land = action.payload;
@@ -58,6 +79,6 @@ const landReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default landReducer;

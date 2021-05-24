@@ -7,6 +7,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import CreateLandFormPage from "./components/CreateLandForm";
 import SideBar from "./components/Sidebar"
+import Lands from "./components/Lands";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/lands/new">
             <CreateLandFormPage />
+          </Route>
+          <Route path="/lands/:landId">
+            <Lands />
           </Route>
         </Switch>
       )}

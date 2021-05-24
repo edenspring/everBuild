@@ -54,9 +54,7 @@ router.get(
         userId
       }
     })
-    res.json({
-      lands,
-  })
+    res.json(lands)
   })
 )
 

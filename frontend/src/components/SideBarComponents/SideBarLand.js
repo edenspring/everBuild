@@ -6,14 +6,14 @@ import "./SideBarComponents.css";
 function SideBarLand() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const currentLand = useSelector((state)=>state.land.land)
   const [userLands, setUserLands] = useState([]);
   // console.log(sessionUser);
   useEffect(() => {
     dispatch(landActions.getUserLands(sessionUser.id)).then((data) =>
-      setUserLands(data.lands)
+      setUserLands(data)
     );
-    console.log(userLands);
-  }, [dispatch, sessionUser.id, userLands]);
+  }, [dispatch, sessionUser.id, currentLand]);
 
   // const userLands = useSelector((state) => state.land.userLands)
 
@@ -23,7 +23,7 @@ function SideBarLand() {
     <div className="userlands__div">
       {userLands.map((e, i) =>
         <div className='individual__land'>
-          <NavLink to={`/lands/${e.id}`} key={i}>
+          <NavLink exact to={`/lands/${e.id}`} key={i}>
             {" "}
             {e.name}{" "}
           </NavLink>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import * as landActions from "../../store/land";
 
 import "./CreateLandForm.css";
@@ -10,13 +11,17 @@ function CreateLandFormPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  console.log(sessionUser);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name, description, sessionUser.id)
     const userId = sessionUser.id
-    return dispatch(landActions.createLand({name, description, userId}))
+
+    dispatch(landActions.createLand({name, description, userId}))
+      .then(()=>dispatch(landActions.getUserLands(userId)))
+    return history.push('/');
+
   };
 
   return (
