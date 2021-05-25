@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import CreateLandFormPage from "./components/CreateLandForm";
 import SideBar from "./components/Sidebar";
 import Lands from "./components/Lands";
+import CreatePlaceForm from "./components/CreatePlaceForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route path="/lands/:landId">
             <Lands />
+          </Route>
+          <Route path="/places/new">
+            <CreatePlaceForm />
           </Route>
         </Switch>
       )}

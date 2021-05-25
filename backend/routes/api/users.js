@@ -7,6 +7,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const {Land} = require('../../db/models/')
+const {Place} = require('../../db/models')
 
 const router = express.Router();
 const validateSignup = [
@@ -52,7 +53,8 @@ router.get(
     const lands = await Land.findAll({
       where: {
         userId
-      }
+      },
+      include: Place
     })
     res.json(lands)
   })

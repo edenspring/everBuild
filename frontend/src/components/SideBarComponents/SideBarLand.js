@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as landActions from "../../store/land";
 import "./SideBarComponents.css";
+import SideBarPlace from "./SideBarPlace";
 function SideBarLand() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -22,11 +23,16 @@ function SideBarLand() {
   return (
     <div className="userlands__div">
       {userLands.map((e, i) =>
-        <div className='individual__land'>
-          <NavLink exact to={`/lands/${e.id}`} key={i}>
+        <div key={i} className='individual__land'>
+          <NavLink exact to={`/lands/${e.id}`} >
             {" "}
             {e.name}{" "}
           </NavLink>
+          {e.Places && (
+            <ul>
+              {e.Places.map((place, idx)=> <SideBarPlace place={place} key={idx} />)}
+            </ul>
+          )}
         </div>
       )}
     </div>
