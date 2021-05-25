@@ -74,7 +74,7 @@ export const deleteCurrentLand = (landId) => async (dispatch) => {
   const response = await csrfFetch(`/api/lands/${landId}/delete`, {
     method: "DELETE",
   });
-  dispatch(deleteLand());
+  dispatch(setLand(null));
 };
 
 const initialState = { land: null };

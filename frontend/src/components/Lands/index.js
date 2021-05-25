@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as landActions from "../../store/land";
+import DeleteLandModal from "./DeleteLandModal";
 import "./Lands.css";
 
 function Lands() {
@@ -17,29 +18,30 @@ function Lands() {
   const history = useHistory();
   console.log(">>>>>>>>>>", userLands);
 
-
   useEffect(() => {
     dispatch(landActions.getLand(landId)).then((data) => {
-    setCurrentLand(data);
-    setName(data.name);
-    setDescription(data.description)
-  });
+      setCurrentLand(data);
+      setName(data.name);
+      setDescription(data.description);
+    });
   }, [dispatch, landId]);
-  console.log(currentLand)
+  console.log(currentLand);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, description, sessionUser.id)
-    const userId = sessionUser.id
+    console.log(name, description, sessionUser.id);
+    const userId = sessionUser.id;
 
-    dispatch(landActions.updateLand({name, description, currentLand}))
-      .then(()=>dispatch(landActions.getUserLands(userId)))
-    return history.push('/');
-  }
+    dispatch(landActions.updateLand({ name, description, currentLand })).then(
+      () => dispatch(landActions.getUserLands(userId))
+    );
+    return history.push("/");
+  };
 
   const handleDelete = () => {
-    dispatch(landActions.deleteCurrentLand(currentLand.id))
-  }
+    dispatch(landActions.deleteCurrentLand(currentLand.id));
+    return history.push("/");
+  };
 
   return (
     // <div classname="land__details">
@@ -48,27 +50,29 @@ function Lands() {
     //   <div>{currentLand.name}</div>
     //   <h3> Description</h3>
     //   <div>{currentLand.description}</div>
-    <form onSubmit={handleSubmit}>
-      {console.log(currentLand)}
-      <label>
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
+    <>
+      <form onSubmit={handleSubmit}>
+        {console.log(currentLand)}
+        <label>
+          Name
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
-      </label>
-      <label>
-        Description
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+        </label>
+        <label>
+          Description
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
-      </label>
-      <button type="submit">Save Changes</button>
-      <button onClick={handleDelete}>Delete This Land</button>
-    </form>
+        </label>
+        <button type="submit">Save Changes</button>
+      </form>
+      <DeleteLandModal currentLand={currentLand} />
+    </>
     // </div>
   );
 }

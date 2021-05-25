@@ -43,7 +43,7 @@ router.delete(
     const id = req.params.landId;
     const landForDeleting = await Land.findByPk(id);
     await landForDeleting.destroy();
-    res.status(200);
+    res.json(landForDeleting);
   })
 )
 
