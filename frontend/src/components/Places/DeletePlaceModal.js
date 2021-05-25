@@ -7,7 +7,7 @@ function DeletePlaceModal({currentPlace}){
 
   return (
     <>
-    <button onClick={()=> setShowModal(true)}>Delete this land</button>
+    <button onClick={()=> setShowModal(true)}>Delete this place</button>
     {showModal && (
       <Modal onClose={()=> setShowModal(false)}>
         <DeletePlaceConfirmation currentPlace={currentPlace}/>

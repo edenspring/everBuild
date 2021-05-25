@@ -11,6 +11,7 @@ router.post(
   asyncHandler(async(req, res)=>{
     const {name, description, landId, userId} = req.body;
     const place = await Place.createNew({name, description, landId, userId});
+    
     return res.json(place)
   })
 );

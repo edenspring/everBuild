@@ -7,14 +7,15 @@ import SideBarPlace from "./SideBarPlace";
 function SideBarLand() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const currentLand = useSelector((state)=>state.land.land)
+  const currentLand = useSelector((state)=>state.land.land);
+  const currentPlace = useSelector((state)=>state.place);
   const [userLands, setUserLands] = useState([]);
   // console.log(sessionUser);
   useEffect(() => {
     dispatch(landActions.getUserLands(sessionUser.id)).then((data) =>
       setUserLands(data)
     );
-  }, [dispatch, sessionUser.id, currentLand]);
+  }, [dispatch, sessionUser.id, currentLand, currentPlace]);
 
   // const userLands = useSelector((state) => state.land.userLands)
 

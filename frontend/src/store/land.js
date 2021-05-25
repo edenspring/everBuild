@@ -4,7 +4,7 @@ const SET_LAND = "lands/setLand";
 const USER_LANDS = "lands/setUserLands";
 const DELETE_LAND = "lands/deleteLand";
 
-const setLand = (land) => {
+export const setLand = (land) => {
   return {
     type: SET_LAND,
     payload: land,

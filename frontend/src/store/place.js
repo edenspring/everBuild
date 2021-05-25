@@ -1,5 +1,4 @@
 import { csrfFetch } from "./csrf";
-import * as landActions from "../../store/land";
 
 const SET_PLACE = "places/setPlace";
 
@@ -21,13 +20,15 @@ export const createPlace = (place) => async (dispatch) => {
       userId,
     }),
   });
+  const data = await response.json();
+  dispatch(setCurrentPlace(data))
 };
 
 export const deleteCurrentPlace = (placeId) => async (dispatch) => {
   const response = await csrfFetch(`/api/places/${placeId}/delete`, {
     method: "DELETE",
   });
-  dispatch(landActions.setLand(null));
+  dispatch(setCurrentPlace(null));
 };
 
 export const updateplace = (place) => async (dispatch) => {
@@ -41,11 +42,28 @@ export const updateplace = (place) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(setPlace(data));
+  dispatch(setCurrentPlace(data));
 };
 
 export const getPlace = (placeId) => async (dispatch) => {
   const response = await csrfFetch(`/api/places/${placeId}`);
   const data = await response.json();
+  dispatch(setCurrentPlace(data))
   return data;
 };
+
+const initialState = {};
+
+const placeReducer = (state = initialState, action) => {
+  let newState;
+  switch(action.type){
+    case SET_PLACE:
+      newState = Object.assign({}, state);
+      newState.place = action.payload;
+      return newState;
+    default:
+      return state;
+  }
+}
+
+export default placeReducer;
