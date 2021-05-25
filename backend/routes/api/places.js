@@ -24,5 +24,28 @@ router.get(
   })
 )
 
+router.put(
+  '/:placeId/edit',
+  asyncHandler(async(req, res)=>{
+    const id = req.params.placeId;
+    const {name, description} = req.body;
+    const currentPlace = await Place.findByPk(id);
+    currentPlace.name = name;
+    currentPlace.description = description;
+    await currenPlace.save();
+    res.json(currentPlace)
+  })
+)
+
+router.delete(
+  '/:placeId/delete',
+  asyncHandler(async(req, res)=>{
+    const placeId = req.params.placeId;
+    const place = await Place.findByPk(placeId);
+    await place.destroy();
+    res.json(place);
+  })
+)
+
 
 module.exports = router;
