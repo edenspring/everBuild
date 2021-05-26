@@ -7,7 +7,6 @@ import "./Lands.css";
 
 function Lands() {
   const sessionUser = useSelector((state) => state.session.user);
-  const userLands = useSelector((state) => state.land.userLands);
   const currentLand = useSelector((state) => state.land.land);
 
   const { landId } = useParams();
@@ -83,7 +82,7 @@ function Lands() {
       <button className="content__save" onClick={handleUpdate}>
         Save Changes
       </button>
-      <button className="content__delete">Delete This Land</button>
+      <DeleteLandModal currentLand={currentLand} />
       {children}
     </>
   );

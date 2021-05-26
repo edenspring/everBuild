@@ -10,66 +10,68 @@ function Places() {
   const history = useHistory();
 
   const sessionUser = useSelector((state) => state.session.user);
- // const userLands = useSelector((state)=> state.land.userLands);
-  const [currentPlace, setCurrentPlace] = useState({});
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [parentLand, setParentLand] = useState(0);
-  const [userLands, setUserLands] = useState([]);
+  const currentPlace = useSelector((state) => state.place.place);
+  const userLands = useSelector((state) => state.land.userLands);
+
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [parentLand, setParentLand] = useState(0);
+
 
   const { placeId } = useParams();
   const userId = sessionUser.id;
 
   useEffect(() => {
-    dispatch(
-      placeActions.getPlace(placeId)).then((data) => {
-        setCurrentPlace(data);
-        setName(data.name);
-        setDescription(data.description);
-        setParentLand(data.landId);
-      }
-    ).then(()=> dispatch(landActions.getUserLands(userId))
-    .then(data => setUserLands(data)));
+    dispatch(placeActions.getPlace(placeId));
   }, [dispatch, placeId]);
 
-  const handleSubmit = (e) => {
-    const payload = {name, description, currentPlace, landId:parentLand}
+  const handleUpdate = (e) => {
+    const description = document.querySelector(
+      ".content__description__body"
+    ).innerText;
+    const name = document.querySelector(".content__name__body").innerText;
+    const parentLand = document.querySelector(".content__parent__selector").value;
+    const payload = { name, description, currentPlace, landId: parentLand };
     e.preventDefault();
     console.log();
-    dispatch(placeActions.updatePlace(payload))
-  }
+    dispatch(placeActions.updatePlace(payload));
+  };
 
   return (
-    <div className='place content'>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Description
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-        <select onChange={(e) => setParentLand(e.target.value)} value={parentLand}>
-          <option>Please choose...</option>
-          {userLands.map((e, i) => (
-            <option key={i} value={e.id}>
-              {e.name}
-            </option>
-          ))}
+    <>
+      <div className="content__name">Name</div>
+      <div className="content__name__body" contentEditable="true">
+        {currentPlace ? currentPlace.name : null}
+      </div>
+      <div className="content__description">Description</div>
+      {/* <div className="content__description__body">
+        <textarea value={description} disabled={disabled} />
+      </div> */}
+      <div className="content__description__body" contentEditable="true">
+        {currentPlace ? currentPlace.description : null}
+      </div>
+      <div className="content__parent__text">
+        Select parent land:
+      </div>
+      <div className="content__parent">
+        <select
+          className="content__parent__selector"
+          value={currentPlace ? currentPlace.landId : null}
+        >
+          {userLands
+            ? userLands.map((e, i) => (
+                <option key={i} value={e.id}>
+                  {e.name}
+                </option>
+              ))
+            : null}
         </select>
-        <button type="submit">Update Place</button>
-      </form>
-      <DeletePlaceModal currentPlace={currentPlace} />
-    </div>
+      </div>
+      <button className="content__save" onClick={handleUpdate}>
+        Save Changes
+      </button>
+      <DeletePlaceModal currentPlace={currentPlace}/>
+    </>
   );
 }
 
