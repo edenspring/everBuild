@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import * as landActions from "../../store/land";
 import * as placeActions from "../../store/place"
+import './CreatePlace.css'
 
 const { useState, useEffect } = require("react")
 
@@ -35,7 +36,7 @@ function CreatePlaceForm() {
   }
 
   return (
-    <div>
+    <div className="create__place content">
       <form onSubmit={handleSubmit}>
       <label>
         Name

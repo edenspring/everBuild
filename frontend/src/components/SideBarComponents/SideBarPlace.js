@@ -4,14 +4,16 @@ import { NavLink } from "react-router-dom";
 import * as placeActions from "../../store/place";
 import "./SideBarComponents.css";
 
-function SideBarPlace({place}){
-  return(
+function SideBarPlace({ place }) {
+  return (
     <>
-    <li>
-      <NavLink to={`/places/${place.id}`}>{place.name}</NavLink>
-    </li>
+      <li>
+        <NavLink to={`/places/${place.id}`}>
+          <div className='link__container__div'>{place.name}</div>
+        </NavLink>
+      </li>
     </>
-  )
+  );
 }
 
 export default SideBarPlace;

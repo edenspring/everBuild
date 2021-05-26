@@ -11,7 +11,7 @@ router.post(
   asyncHandler(async(req, res)=>{
     const {name, description, landId, userId} = req.body;
     const place = await Place.createNew({name, description, landId, userId});
-    
+
     return res.json(place)
   })
 );
@@ -29,11 +29,14 @@ router.put(
   '/:placeId/edit',
   asyncHandler(async(req, res)=>{
     const id = req.params.placeId;
-    const {name, description} = req.body;
+    console.log('>>>', id)
+    const {name, description, landId} = req.body;
     const currentPlace = await Place.findByPk(id);
+    console.log('>>>>', currentPlace)
     currentPlace.name = name;
     currentPlace.description = description;
-    await currenPlace.save();
+    currentPlace.landId = landId;
+    await currentPlace.save();
     res.json(currentPlace)
   })
 )

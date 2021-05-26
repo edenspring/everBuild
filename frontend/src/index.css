@@ -1,1 +1,160 @@
 /* TODO Add site wide styles */
+
+body {
+  box-sizing: border-box;
+}
+.app__container {
+  width: auto;
+  height: 98vh;
+  /* background-image: url("https://cdn2.wanderlust.co.uk/media/1037/forest-web.jpg?anchor=center&mode=crop&width=1440&height=540&format=auto&quality=80&rnd=132605629110000000");
+  background-repeat: no-repeat;
+  background-size: cover; */
+  color: #929487;
+  background-color: #a1b0ab;
+  color: #929487;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 10% 90%;
+  gap: 0px 0px;
+  grid-template-areas:
+    "nav nav"
+    "sidebar content";
+}
+
+.sidebar {
+  grid-area: sidebar;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  z-index: 1;
+  background-color: #373d20;
+  color: #929487;
+
+  height: auto;
+}
+
+.sidebar__content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  z-index: 1;
+}
+
+.link__container__div {
+  display:block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.navbar {
+  grid-area: nav;
+}
+
+.content__container {
+  grid-area: content;
+  color: #d5ecd4;
+  border-radius: 5px;
+
+  display: grid;
+  grid-template-columns: 15% 1fr;
+  grid-template-rows: 2em 1fr 6% 7% 7%;
+  gap: 0px 0px;
+  grid-template-areas:
+    "name name_body"
+    "description description_body"
+    "extra extra"
+    "delete save"
+    "children_text children";
+}
+
+.content__name {
+  grid-area: name;
+  font-size: x-large;
+}
+
+.content__name__body {
+  font-size: x-large;
+  grid-area: name_body;
+  align-content: center;
+  border: 2px solid black;
+  border-bottom: none;
+  background-color: #F1F4F3;
+  color: #0B0D0C;
+  outline: none;
+}
+
+.content__description {
+  grid-area: description;
+}
+
+.content__description__body {
+  grid-area: description_body;
+  height: 100%;
+  border: 2px solid black;
+  border-top: none;
+  padding-left: 5px;
+  background-color: #F1F4F3;
+  color: #0B0D0C;
+  outline: none;
+}
+
+
+.content__description__body textarea {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  background-color: #F1F4F3;
+  color: #0B0D0C;
+}
+
+.content__save {
+  grid-area: save;
+  justify-content: right;
+
+}
+
+.content__delete {
+  grid-area: delete;
+  margin:1rem;
+  color: red;
+  background-color: white;
+}
+
+.content__children__text {
+  grid-area: children_text;
+  display: flex;
+  justify-content: space-around;
+}
+
+.content__children {
+  grid-area: children;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+a {
+  font-size: large;
+  color: #929487;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+a:visited {
+  color: white;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+form {
+  display: grid;
+}
+
+.lands {
+  display: grid;
+}

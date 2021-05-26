@@ -15,35 +15,37 @@ function CreateLandFormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, description, sessionUser.id)
-    const userId = sessionUser.id
+    console.log(name, description, sessionUser.id);
+    const userId = sessionUser.id;
 
-    dispatch(landActions.createLand({name, description, userId}))
-      .then(()=>dispatch(landActions.getUserLands(userId)))
-    return history.push('/');
-
+    dispatch(landActions.createLand({ name, description, userId })).then(() =>
+      dispatch(landActions.getUserLands(userId))
+    );
+    return history.push("/");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Description
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </label>
-      <button type="submit">Create Land</button>
-    </form>
+    <div className="createland__form content">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Description
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+        <button type="submit">Create Land</button>
+      </form>
+    </div>
   );
 }
 

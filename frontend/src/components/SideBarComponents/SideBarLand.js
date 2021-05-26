@@ -24,10 +24,9 @@ function SideBarLand() {
   return (
     <div className="userlands__div">
       {userLands.map((e, i) =>
-        <div key={i} className='individual__land'>
-          <NavLink exact to={`/lands/${e.id}`} >
-            {" "}
-            {e.name}{" "}
+        <div key={i} className='individual__land sidebar__content'>
+          <NavLink className='land__link' exact to={`/lands/${e.id}`} >
+            <div className='link__container__div'>{e.name}</div>
           </NavLink>
           {e.Places && (
             <ul>

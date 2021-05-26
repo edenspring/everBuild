@@ -33,12 +33,14 @@ function Places() {
   }, [dispatch, placeId]);
 
   const handleSubmit = (e) => {
-    e.prventDefault();
-    console.log()
+    const payload = {name, description, currentPlace, landId:parentLand}
+    e.preventDefault();
+    console.log();
+    dispatch(placeActions.updatePlace(payload))
   }
 
   return (
-    <>
+    <div className='place content'>
       <form onSubmit={handleSubmit}>
         <label>
           Name
@@ -67,7 +69,7 @@ function Places() {
         <button type="submit">Update Place</button>
       </form>
       <DeletePlaceModal currentPlace={currentPlace} />
-    </>
+    </div>
   );
 }
 

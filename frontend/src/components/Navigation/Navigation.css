@@ -1,4 +1,15 @@
 .navbar {
   display:flex;
   justify-content: space-around;
+  background-color: #373d20;
+  color: #929487;
+  width: 100%
+}
+
+a {
+  color: #929487;
+}
+
+a:visited {
+  color: white;
 }

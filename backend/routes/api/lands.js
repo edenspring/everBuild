@@ -2,7 +2,8 @@ const express = require('express')
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Land } = require('../../db/models')
+const { Land } = require('../../db/models');
+const { Place } = require('../../db/models');
 
 const router = express.Router();
 
@@ -19,7 +20,9 @@ router.get(
   '/:landId',
   asyncHandler(async(req, res)=>{
     const id = req.params.landId;
-    const land = await Land.findByPk(id)
+    const land = await Land.findByPk(id,{
+      include: Place
+    })
     res.json(land)
   })
 )

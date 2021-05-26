@@ -20,32 +20,34 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="app__container">
       <Navigation isLoaded={isLoaded} />
       <SideBar />
       {isLoaded && (
-        <Switch>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/lands/new">
-            <CreateLandFormPage />
-          </Route>
-          <Route path="/lands/:landId">
-            <Lands />
-          </Route>
-          <Route path="/places/new">
-            <CreatePlaceForm />
-          </Route>
-          <Route path="/places/:placeId">
-            <Places />
-          </Route>
-        </Switch>
+        <div className="content__container">
+          <Switch>
+            <Route path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/lands/new">
+              <CreateLandFormPage />
+            </Route>
+            <Route path="/lands/:landId">
+              <Lands />
+            </Route>
+            <Route path="/places/new">
+              <CreatePlaceForm />
+            </Route>
+            <Route path="/places/:placeId">
+              <Places />
+            </Route>
+          </Switch>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

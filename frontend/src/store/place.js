@@ -31,7 +31,7 @@ export const deleteCurrentPlace = (placeId) => async (dispatch) => {
   dispatch(setCurrentPlace(null));
 };
 
-export const updateplace = (place) => async (dispatch) => {
+export const updatePlace = (place) => async (dispatch) => {
   const { currentPlace, name, description, landId } = place;
   const response = await csrfFetch(`/api/places/${currentPlace.id}/edit`, {
     method: "PUT",

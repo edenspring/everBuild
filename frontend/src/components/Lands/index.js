@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import * as landActions from "../../store/land";
 import DeleteLandModal from "./DeleteLandModal";
 import "./Lands.css";
@@ -8,28 +8,52 @@ import "./Lands.css";
 function Lands() {
   const sessionUser = useSelector((state) => state.session.user);
   const userLands = useSelector((state) => state.land.userLands);
-
-  const [currentLand, setCurrentLand] = useState({});
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const currentLand = useSelector((state) => state.land.land);
 
   const { landId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(">>>>>>>>>>", userLands);
 
+  let children;
   useEffect(() => {
-    dispatch(landActions.getLand(landId)).then((data) => {
-      setCurrentLand(data);
-      setName(data.name);
-      setDescription(data.description);
-    });
+    dispatch(landActions.getLand(landId));
   }, [dispatch, landId]);
-  console.log(currentLand);
 
-  const handleSubmit = (e) => {
+  const places = currentLand ? currentLand.Places : [];
+
+  if (places.length && currentLand !== null) {
+    children = (
+      <>
+        <div className="content__children__text">
+          Places connected to {currentLand.name}
+        </div>
+        <div className="content__children">
+          {places?.map((e, i) => (
+            <NavLink key={i} to={`/places/${e.id}`}>
+              {e.name}
+            </NavLink>
+          ))}
+        </div>
+      </>
+    );
+  } else {
+    children = (
+      <>
+        <div className="content__children">
+          <NavLink to={`/places/new`}>
+            No connected places yet, create one here!
+          </NavLink>
+        </div>
+      </>
+    );
+  }
+  const handleUpdate = (e) => {
     e.preventDefault();
-    console.log(name, description, sessionUser.id);
+    const description = document.querySelector(
+      ".content__description__body"
+    ).innerText;
+    const name = document.querySelector(".content__name__body").innerText;
+
     const userId = sessionUser.id;
 
     dispatch(landActions.updateLand({ name, description, currentLand })).then(
@@ -44,36 +68,24 @@ function Lands() {
   };
 
   return (
-    // <div classname="land__details">
-    //   <h2> Land </h2>
-    //   <h3> Name </h3>
-    //   <div>{currentLand.name}</div>
-    //   <h3> Description</h3>
-    //   <div>{currentLand.description}</div>
     <>
-      <form onSubmit={handleSubmit}>
-        {console.log(currentLand)}
-        <label>
-          Name
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Description
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-        <button type="submit">Save Changes</button>
-      </form>
-      <DeleteLandModal currentLand={currentLand} />
+      <div className="content__name">Name</div>
+      <div className="content__name__body" contentEditable="true">
+        {currentLand ? currentLand.name : null}
+      </div>
+      <div className="content__description">Description</div>
+      {/* <div className="content__description__body">
+        <textarea value={description} disabled={disabled} />
+      </div> */}
+      <div className="content__description__body" contentEditable="true">
+        {currentLand ? currentLand.description : null}
+      </div>
+      <button className="content__save" onClick={handleUpdate}>
+        Save Changes
+      </button>
+      <button className="content__delete">Delete This Land</button>
+      {children}
     </>
-    // </div>
   );
 }
 
