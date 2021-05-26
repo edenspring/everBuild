@@ -34,13 +34,7 @@ body {
   height: auto;
 }
 
-.sidebar__content {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: break-word;
-  z-index: 1;
-}
+
 
 .link__container__div {
   display:block;
@@ -65,7 +59,7 @@ body {
   grid-template-areas:
     "name name_body"
     "description description_body"
-    "extra extra"
+    "parent_text parent_select"
     "delete save"
     "children_text children";
 }
@@ -110,17 +104,39 @@ body {
   color: #0B0D0C;
 }
 
+.content__parent__text {
+  grid-area: parent_text;
+  justify-content: center;
+  align-self: center;
+
+}
+
+.content__parent {
+  grid-area: parent_select;
+  justify-content: center;
+  align-self: center;
+  margin: 3px;
+}
+
+.content__parent select {
+  width: 15%;
+
+}
+
 .content__save {
   grid-area: save;
   justify-content: right;
 
 }
 
+
 .content__delete {
+  align-self: center;
   grid-area: delete;
   margin:1rem;
   color: red;
   background-color: white;
+  height: 65%;
 }
 
 .content__children__text {
@@ -141,6 +157,7 @@ a {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 a:visited {
@@ -148,8 +165,24 @@ a:visited {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-decoration: none;
 }
 
+a:hover {
+
+}
+
+.sidebar__content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  z-index: 1;
+}
+
+.link__container__div:hover {
+  background-color: #6C773F;
+}
 
 form {
   display: grid;
