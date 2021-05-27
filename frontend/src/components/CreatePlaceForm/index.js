@@ -22,12 +22,12 @@ function CreatePlaceForm() {
       .then(data => setUserLands(data))
   },[dispatch, sessionUser])
 
-  console.log(userLands)
+  // console.log(userLands)
 
   const handleSubmit = (e) =>{
     e.preventDefault();
     const userId = sessionUser.id;
-    console.log(name, description, parentLand, userId)
+    // console.log(name, description, parentLand, userId)
     const payload = {name, description, landId:parentLand, userId}
 
     dispatch(placeActions.createPlace(payload))

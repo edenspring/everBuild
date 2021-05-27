@@ -68,11 +68,11 @@ function Lands() {
 
   return (
     <>
-      <div className="content__name">Name</div>
+      <div className="content__name">Name:  </div>
       <div className="content__name__body" contentEditable="true">
         {currentLand ? currentLand.name : null}
       </div>
-      <div className="content__description">Description</div>
+      <div className="content__description">Description:  </div>
       {/* <div className="content__description__body">
         <textarea value={description} disabled={disabled} />
       </div> */}

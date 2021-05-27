@@ -29,10 +29,10 @@ router.put(
   '/:placeId/edit',
   asyncHandler(async(req, res)=>{
     const id = req.params.placeId;
-    console.log('>>>', id)
+    // console.log('>>>', id)
     const {name, description, landId} = req.body;
     const currentPlace = await Place.findByPk(id);
-    console.log('>>>>', currentPlace)
+    // console.log('>>>>', currentPlace)
     currentPlace.name = name;
     currentPlace.description = description;
     currentPlace.landId = landId;

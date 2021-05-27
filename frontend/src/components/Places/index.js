@@ -15,14 +15,19 @@ function Places() {
 
   // const [name, setName] = useState("");
   // const [description, setDescription] = useState("");
-  // const [parentLand, setParentLand] = useState(0);
+  const [parentLand, setParentLand] = useState(null);
 
 
   const { placeId } = useParams();
   const userId = sessionUser.id;
 
+  // if(currentPlace && currentPlace.landId !== undefined){
+  //   setParentLand(currentPlace.landId)
+  // }
+
   useEffect(() => {
-    dispatch(placeActions.getPlace(placeId));
+    dispatch(placeActions.getPlace(placeId))
+    .then(data=>setParentLand(data.landId));
   }, [dispatch, placeId]);
 
   const handleUpdate = (e) => {
@@ -32,18 +37,19 @@ function Places() {
     const name = document.querySelector(".content__name__body").innerText;
     const parentLand = document.querySelector(".content__parent__selector").value;
     const payload = { name, description, currentPlace, landId: parentLand };
+    console.log(payload)
     e.preventDefault();
-    console.log();
+    // console.log();
     dispatch(placeActions.updatePlace(payload));
   };
 
   return (
     <>
-      <div className="content__name">Name</div>
+      <div className="content__name">Name:  </div>
       <div className="content__name__body" contentEditable="true">
         {currentPlace ? currentPlace.name : null}
       </div>
-      <div className="content__description">Description</div>
+      <div className="content__description">Description:  </div>
       {/* <div className="content__description__body">
         <textarea value={description} disabled={disabled} />
       </div> */}
@@ -56,7 +62,8 @@ function Places() {
       <div className="content__parent">
         <select
           className="content__parent__selector"
-          value={currentPlace ? currentPlace.landId : null}
+          value={parentLand}
+          onChange={(e)=>setParentLand(e.target.value)}
         >
           {userLands
             ? userLands.map((e, i) => (

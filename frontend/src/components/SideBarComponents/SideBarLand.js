@@ -13,7 +13,7 @@ function SideBarLand() {
   const [expand, setExpand] = useState(false);
   const [display, setDisplay] = useState("none");
 
-  // console.log(sessionUser);
+  // // console.log(sessionUser);
   useEffect(() => {
     dispatch(landActions.getUserLands(sessionUser.id)).then((data) =>
       setUserLands(data)
@@ -22,7 +22,7 @@ function SideBarLand() {
 
   // const userLands = useSelector((state) => state.land.userLands)
 
-  console.log(userLands);
+  // console.log(userLands);
   function iconHover(e) {
     const div = e.target.closest(".individual__land");
     const icon = div.querySelector("i");
@@ -66,7 +66,7 @@ function SideBarLand() {
         >
           <NavLink className="land__link" exact to={`/lands/${e.id}`}>
             <div className="link__container__div">
-              <i id="icon" class="fas fa-angle-right"></i>
+              <i id="icon" className="fas fa-angle-right"></i>
               <span>{` `}</span>
               {("    ", e.name)}
             </div>

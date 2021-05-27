@@ -67,6 +67,9 @@ body {
 .content__name {
   grid-area: name;
   font-size: x-large;
+  text-decoration: underline;
+  justify-self: right;
+  padding: 3px;
 }
 
 .content__name__body {
@@ -82,6 +85,9 @@ body {
 
 .content__description {
   grid-area: description;
+  text-decoration: underline;
+  justify-self: right;
+  padding: 3px;
 }
 
 .content__description__body {
@@ -168,8 +174,12 @@ a:visited {
   text-decoration: none;
 }
 
-a:hover {
+li a{
+  font-size:medium;
+}
 
+a:hover {
+  text-decoration: underline;
 }
 
 .sidebar__content {

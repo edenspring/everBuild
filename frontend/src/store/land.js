@@ -65,7 +65,7 @@ export const getUserLands = (userId) => async (dispatch) => {
   // const {userId} = userId
   const response = await csrfFetch(`/api/users/${userId}/lands`);
   const data = await response.json();
-  console.log("get userLands log: ", data);
+  // console.log("get userLands log: ", data);
   dispatch(setUserLands(data));
   return data;
 };
@@ -80,7 +80,7 @@ export const deleteCurrentLand = (landId) => async (dispatch) => {
 const initialState = { land: null };
 
 const landReducer = (state = initialState, action) => {
-  console.log("state", state);
+  // console.log("state", state);
   let newState;
   switch (action.type) {
     case SET_LAND:

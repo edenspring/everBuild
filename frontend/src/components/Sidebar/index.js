@@ -22,7 +22,6 @@ function SideBar() {
   }
   return (
     <div className='sidebar'>
-      <h2>Sidebar</h2>
       { sideBarContent }
     </div>
     );

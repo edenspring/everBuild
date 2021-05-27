@@ -35,7 +35,7 @@ function Places() {
   const handleSubmit = (e) => {
     const payload = {name, description, currentPlace, landId:parentLand}
     e.preventDefault();
-    console.log();
+    // console.log();
     dispatch(placeActions.updatePlace(payload))
   }
 

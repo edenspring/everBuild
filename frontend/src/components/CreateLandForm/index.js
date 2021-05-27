@@ -1,51 +1,89 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import * as landActions from "../../store/land";
-
-import "./CreateLandForm.css";
+// import "./Lands.css";
 
 function CreateLandFormPage() {
-  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const currentLand = useSelector((state) => state.land.land);
 
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const { landId } = useParams();
+  const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  // let children;
+  // useEffect(() => {
+  //   dispatch(landActions.getLand(landId));
+  // }, [dispatch, landId]);
+
+  const places = currentLand ? currentLand.Places : [];
+
+  // if (places.length && currentLand !== null) {
+  //   children = (
+  //     <>
+  //       <div className="content__children__text">
+  //         Places connected to {currentLand.name}
+  //       </div>
+  //       <div className="content__children">
+  //         {places?.map((e, i) => (
+  //           <NavLink key={i} to={`/places/${e.id}`}>
+  //             {e.name}
+  //           </NavLink>
+  //         ))}
+  //       </div>
+  //     </>
+  //   );
+  // } else {
+  //   children = (
+  //     <>
+  //       <div className="content__children">
+  //         <NavLink to={`/places/new`}>
+  //           No connected places yet, create one here!
+  //         </NavLink>
+  //       </div>
+  //     </>
+  //   );
+  // }
+  const handleUpdate = (e) => {
     e.preventDefault();
-    console.log(name, description, sessionUser.id);
+    const description = document.querySelector(".content__description__body").innerText;
+    const name = document.querySelector(".content__name__body").innerText;
+
     const userId = sessionUser.id;
 
-    dispatch(landActions.createLand({ name, description, userId })).then(() =>
-      dispatch(landActions.getUserLands(userId))
+    dispatch(landActions.createLand({ name, description, userId })).then(
+      () => dispatch(landActions.getUserLands(userId))
     );
     return history.push("/");
   };
 
+  // const handleDelete = () => {
+  //   dispatch(landActions.deleteCurrentLand(currentLand.id));
+  //   return history.push("/");
+  // };
+
   return (
-    <div className="createland__form content">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Description
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-        <button type="submit">Create Land</button>
-      </form>
-    </div>
+    <>
+      <div className="content__name">Name:  </div>
+      <div className="content__name__body" contentEditable="true">
+
+      </div>
+      <div className="content__description">Description:  </div>
+      {/* <div className="content__description__body">
+        <textarea value={description} disabled={disabled} />
+      </div> */}
+      <div className="content__description__body" contentEditable="true">
+
+      </div>
+      <button className="content__save" onClick={handleUpdate}>
+        Create Land
+      </button>
+      {/* <DeleteLandModal currentLand={currentLand} />
+      {children} */}
+    </>
   );
 }
 
