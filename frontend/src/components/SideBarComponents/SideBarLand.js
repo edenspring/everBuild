@@ -52,7 +52,7 @@ function SideBarLand() {
       e.classList.remove("show");
       e.classList.add("hidden");
     });
-    
+
   }
 
   return (
