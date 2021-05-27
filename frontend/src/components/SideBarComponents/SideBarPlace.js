@@ -7,9 +7,9 @@ import "./SideBarComponents.css";
 function SideBarPlace({ place }) {
   return (
     <>
-      <li>
+      <li className='hidden'>
         <NavLink to={`/places/${place.id}`}>
-          <div className='link__container__div'>{place.name}</div>
+          <div className='link__container__div'  >{place.name}</div>
         </NavLink>
       </li>
     </>

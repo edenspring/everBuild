@@ -11,6 +11,7 @@ function SideBarLand() {
   const currentPlace = useSelector((state) => state.place);
   const [userLands, setUserLands] = useState([]);
   const [expand, setExpand] = useState(false);
+  const [display, setDisplay] = useState("none");
 
   // console.log(sessionUser);
   useEffect(() => {
@@ -23,26 +24,49 @@ function SideBarLand() {
 
   console.log(userLands);
   function iconHover(e) {
-    const div = e.target.closest('.individual__land');
-    const icon = div.querySelector('i');
+    const div = e.target.closest(".individual__land");
+    const icon = div.querySelector("i");
+    const ul = div.querySelector("ul");
+    let ulChildren = ul.children;
+    ulChildren = [...ulChildren];
     icon.classList.remove("fa-angle-right");
     icon.classList.add("fa-angle-down");
+
+    ulChildren.forEach((e) => {
+      e.classList.remove("hidden");
+      e.classList.add("show");
+    });
+
   }
 
   function iconDepart(e) {
-    const div = e.target.closest('.individual__land');
-    const icon = div.querySelector('i');
+    const div = e.target.closest(".individual__land");
+    const icon = div.querySelector("i");
+    const ul = div.querySelector("ul");
+    let ulChildren = ul.children;
+    ulChildren = [...ulChildren];
     icon.classList.remove("fa-angle-down");
     icon.classList.add("fa-angle-right");
+
+    ulChildren.forEach((e) => {
+      e.classList.remove("show");
+      e.classList.add("hidden");
+    });
+    
   }
 
   return (
     <div className="userlands__div">
       {userLands.map((e, i) => (
-        <div key={i} className="individual__land sidebar__content" onMouseOver={iconHover} onMouseOut={iconDepart}>
+        <div
+          key={i}
+          className="individual__land sidebar__content"
+          onMouseOver={iconHover}
+          onMouseOut={iconDepart}
+        >
           <NavLink className="land__link" exact to={`/lands/${e.id}`}>
             <div className="link__container__div">
-              <i id='icon'class="fas fa-angle-right" ></i>
+              <i id="icon" class="fas fa-angle-right"></i>
               <span>{` `}</span>
               {("    ", e.name)}
             </div>
