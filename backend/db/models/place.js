@@ -1,10 +1,24 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Place = sequelize.define('Place', {
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    landId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
+    description: {
+      allowNull: false,
+      type: DataTypes.TEXT,
+    },
+    landId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: { model: "landId" },
+    },
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: { model: "Users" },
+    },
   }, {});
   Place.associate = function(models) {
     // associations can be defined here

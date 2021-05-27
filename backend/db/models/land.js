@@ -3,9 +3,19 @@ module.exports = (sequelize, DataTypes) => {
   const Land = sequelize.define(
     "Land",
     {
-      name: DataTypes.STRING,
-      description: DataTypes.STRING,
-      userId: DataTypes.INTEGER,
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      description: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      userId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: { model: "Users" },
+      },
     },
     {}
   );
