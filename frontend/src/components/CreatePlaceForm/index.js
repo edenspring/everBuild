@@ -1,67 +1,72 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
+import * as placeActions from "../../store/place";
 import * as landActions from "../../store/land";
-import * as placeActions from "../../store/place"
-import './CreatePlace.css'
-
-const { useState, useEffect } = require("react")
+// import DeletePlaceModal from "./DeletePlaceModal";
 
 function CreatePlaceForm() {
-  const history = useHistory();
   const dispatch = useDispatch();
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [parentLand, setParentLand] = useState("");
-  const [userLands, setUserLands] = useState([]);
+  const history = useHistory();
 
   const sessionUser = useSelector((state) => state.session.user);
-  useEffect(()=>{
-    const userId = sessionUser.id;
-    dispatch(landActions.getUserLands(userId))
-      .then(data => setUserLands(data))
-  },[dispatch, sessionUser])
+  const userLands = useSelector((state) => state.land.userLands);
 
-  // console.log(userLands)
+  const [parentLand, setParentLand] = useState(null);
 
-  const handleSubmit = (e) =>{
+  const { placeId } = useParams();
+  const userId = sessionUser.id;
+
+  useEffect(() => {
+    dispatch(placeActions.getPlace(placeId))
+    .then(data=>setParentLand(data.landId));
+  }, [dispatch, placeId]);
+
+  const handleCreate = (e) => {
+    const description = document.querySelector(
+      ".content__description__body"
+    ).innerText;
+    const name = document.querySelector(".content__name__body").innerText;
+    const parentLand = document.querySelector(".content__parent__selector").value;
+    const payload = { name, description, userId, landId: parentLand };
+    console.log(payload)
     e.preventDefault();
-    const userId = sessionUser.id;
-    // console.log(name, description, parentLand, userId)
-    const payload = {name, description, landId:parentLand, userId}
-
-    dispatch(placeActions.createPlace(payload))
-
-    return history.push('/')
-  }
+    dispatch(placeActions.createPlace(payload));
+  };
 
   return (
-    <div className="create__place content">
-      <form onSubmit={handleSubmit}>
-      <label>
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Description
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </label>
-      <select onChange={(e)=> setParentLand(e.target.value)}>
-        <option>Please choose...</option>
-        {userLands.map((e,i)=><option key={i} value={e.id}>{e.name}</option>)}
-      </select>
-      <button type="submit">Create Place</button>
-    </form>
-    </div>
-  )
+    <>
+      <div className="content__name">Name:  </div>
+      <div className="content__name__body" contentEditable="true">
+      </div>
+      <div className="content__description">Description:  </div>
+      <div className="content__description__body" contentEditable="true">
+      </div>
+      <div className="content__parent__text">
+        Select parent land:
+      </div>
+      <div className="content__parent">
+        <select
+          className="content__parent__selector"
+          value={parentLand}
+          onChange={(e)=>setParentLand(e.target.value)}
+        >
+          <option>Please choose...</option>
+          {userLands
+            ? userLands.map((e, i) => (
+                <option key={i} value={e.id}>
+                  {e.name}
+                </option>
+              ))
+            : null}
+        </select>
+      </div>
+      <button className="content__save" onClick={handleCreate}>
+        Create Place
+      </button>
+      {/* <DeletePlaceModal currentPlace={currentPlace}/> */}
+    </>
+  );
 }
 
 export default CreatePlaceForm;
