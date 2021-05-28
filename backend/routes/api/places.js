@@ -25,6 +25,19 @@ router.get(
   })
 )
 
+router.get(
+  '/user/:userId',
+  asyncHandler(async(req, res)=>{
+    const userId = req.params.userId;
+    const places = await Place.findAll({
+      where: {
+        userId
+      }
+    })
+    res.json(places)
+  })
+)
+
 router.put(
   '/:placeId/edit',
   asyncHandler(async(req, res)=>{

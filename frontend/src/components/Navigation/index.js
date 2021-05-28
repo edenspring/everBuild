@@ -28,7 +28,7 @@ function Navigation({ isLoaded }) {
 
   return (
     <div className='navbar'>
-      <NavLink exact to="/">
+      <NavLink exact to="/home">
         Home
       </NavLink>
       {isLoaded && sessionLinks}

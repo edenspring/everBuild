@@ -17,10 +17,10 @@ function CreatePlaceForm() {
   const { placeId } = useParams();
   const userId = sessionUser.id;
 
-  useEffect(() => {
-    dispatch(placeActions.getPlace(placeId))
-    .then(data=>setParentLand(data.landId));
-  }, [dispatch, placeId]);
+  // useEffect(() => {
+  //   dispatch(placeActions.getPlace(placeId))
+  //   .then(data=>setParentLand(data.landId));
+  // }, [dispatch, placeId]);
 
   const handleCreate = (e) => {
     const description = document.querySelector(

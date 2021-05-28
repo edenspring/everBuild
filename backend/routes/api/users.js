@@ -60,4 +60,17 @@ router.get(
   })
 )
 
+router.get(
+  '/:userId/places',
+  asyncHandler(async (req, res) =>{
+    const userId = req.params.userId;
+    const places = await Place.findAll({
+      where: {
+        userId
+      },
+    })
+    res.json(places)
+  })
+)
+
 module.exports = router;

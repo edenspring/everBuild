@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as landActions from "../../store/land";
+import * as placeActions from "../../store/place"
 import "./SideBarComponents.css";
 import SideBarPlace from "./SideBarPlace";
 function SideBarLand() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const currentLand = useSelector((state) => state.land.land);
-  const currentPlace = useSelector((state) => state.place);
+  const currentPlace = useSelector((state) => state.place.place);
   const [userLands, setUserLands] = useState([]);
   const [expand, setExpand] = useState(false);
   const [display, setDisplay] = useState("none");
@@ -18,6 +19,7 @@ function SideBarLand() {
     dispatch(landActions.getUserLands(sessionUser.id)).then((data) =>
       setUserLands(data)
     );
+    dispatch(placeActions.getUserPlaces(sessionUser.id))
   }, [dispatch, sessionUser.id, currentLand, currentPlace]);
 
   // const userLands = useSelector((state) => state.land.userLands)

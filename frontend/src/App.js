@@ -10,6 +10,7 @@ import SideBar from "./components/Sidebar";
 import Lands from "./components/Lands";
 import CreatePlaceForm from "./components/CreatePlaceForm";
 import Places from "./components/Places";
+import Index from "./components/Home";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route path="/places/:placeId">
               <Places />
+            </Route>
+            <Route exact path="/home">
+              <Index />
             </Route>
           </Switch>
         </div>

@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 const SET_PLACE = "places/setPlace";
+const SET_USER_PLACES = "places/setUserPlaces"
 
 const setCurrentPlace = (place) => {
   return {
@@ -8,6 +9,13 @@ const setCurrentPlace = (place) => {
     payload: place,
   };
 };
+
+const setUserPlaces = (places) => {
+  return {
+    type: SET_USER_PLACES,
+    payload: places,
+  }
+}
 
 export const createPlace = (place) => async (dispatch) => {
   const { name, description, landId, userId } = place;
@@ -52,6 +60,13 @@ export const getPlace = (placeId) => async (dispatch) => {
   return data;
 };
 
+export const getUserPlaces = (userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/users/${userId}/places`);
+  const data = await response.json();
+  dispatch(setUserPlaces(data));
+  return data;
+};
+
 const initialState = {};
 
 const placeReducer = (state = initialState, action) => {
@@ -60,6 +75,10 @@ const placeReducer = (state = initialState, action) => {
     case SET_PLACE:
       newState = Object.assign({}, state);
       newState.place = action.payload;
+      return newState;
+    case SET_USER_PLACES:
+      newState = Object.assign({}, state);
+      newState.userPlaces = action.payload;
       return newState;
     default:
       return state;

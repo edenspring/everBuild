@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   Shop.associate = function (models) {
     Shop.belongsTo(models.User, { foreignKey: "userId" });
     Shop.belongsTo(models.NPC, { foreignKey: "npcId" });
-    Shop.hasMany(models.Item, {
+    Shop.belongsToMany(models.Item, {
       through: "ShopInventory",
       otherKey: "itemId",
       foreignKey: "shopId"

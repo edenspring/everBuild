@@ -17,6 +17,20 @@ router.post(
 )
 
 router.get(
+  '/user/:userId',
+  asyncHandler(async (req, res) =>{
+    const userId = req.params.userId;
+    const lands = await Land.findAll({
+      where: {
+        userId
+      },
+      include: Place
+    })
+    res.json(lands)
+  })
+)
+
+router.get(
   '/:landId',
   asyncHandler(async(req, res)=>{
     const id = req.params.landId;
