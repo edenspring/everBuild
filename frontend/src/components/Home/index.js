@@ -18,11 +18,12 @@ function Index() {
   console.log('>>>>',userLands)
 
   return (
-    <>
+    <div className='index__div'>
+
       <h2>ahoy</h2>
       {userLands &&
       (userLands.map((content,i)=> <ContentCard content={content}/>))}
-    </>
+    </div>
   );
 }
 

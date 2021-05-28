@@ -45,9 +45,9 @@ function App() {
             <Route path="/places/:placeId">
               <Places />
             </Route>
-            <Route exact path="/home">
+            {/* <Route exact path="/home">
               <Index />
-            </Route>
+            </Route> */}
           </Switch>
         </div>
       )}
