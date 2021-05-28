@@ -1,5 +1,5 @@
 function ContentCard({content}){
-  console.log(content)
+  // console.log(content)
   return(
     <div className='content__card'>
       <h2>{content.name}</h2>

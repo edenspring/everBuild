@@ -15,7 +15,7 @@ function Index() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  console.log('>>>>',userLands)
+  // console.log('>>>>',userLands)
 
   return (
     <div className='index__div'>

@@ -16,7 +16,7 @@ function Lands() {
   const { landId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(">>>>>>>>>>", userLands);
+  // console.log(">>>>>>>>>>", userLands);
 
   useEffect(() => {
     dispatch(landActions.getLand(landId)).then((data) => {
@@ -25,11 +25,11 @@ function Lands() {
       setDescription(data.description);
     });
   }, [dispatch, landId]);
-  console.log(currentLand);
+  // console.log(currentLand);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, description, sessionUser.id);
+    // console.log(name, description, sessionUser.id);
     const userId = sessionUser.id;
 
     dispatch(landActions.updateLand({ name, description, currentLand })).then(
@@ -52,7 +52,7 @@ function Lands() {
     //   <div>{currentLand.description}</div>
     <>
       <form onSubmit={handleSubmit}>
-        {console.log(currentLand)}
+        {/* {console.log(currentLand)} */}
         <label >
           <div className='content__name'>Name</div>
           <input

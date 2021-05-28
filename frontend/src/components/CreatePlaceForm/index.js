@@ -29,7 +29,7 @@ function CreatePlaceForm() {
     const name = document.querySelector(".content__name__body").innerText;
     const parentLand = document.querySelector(".content__parent__selector").value;
     const payload = { name, description, userId, landId: parentLand };
-    console.log(payload)
+    // console.log(payload)
     e.preventDefault();
     dispatch(placeActions.createPlace(payload));
   };
