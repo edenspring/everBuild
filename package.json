@@ -1,0 +1,26 @@
+{
+  "name": "everBuild",
+  "version": "1.0.0",
+  "description": "A tool to help tabletop world builders organize their imagination ## MVP List ### Data organization * Oranized from least specific to most specific * Aim is to organize the many threads of world building from a tabletop RPG, allowing GMs to keep their thoughts in a single place * Provides tracking for:   * Lands     * Least specific, can be continents, regions, etc   * Places     * Towns, ruins, cities, large collections of peoples and places that make up lands    * POIs     * Points of interest within places -- shops, inns, dungeons, palaces, shrines, etc     * NPCs     * The people that make up a place, often tied to a point of interest      * Shops     * Collections of items for sale at certain POIs, may or may not be tied to an NPC   * Items     * Database holding items for purchase within a shop, joined by a joins table to show a Shop's inventory * Site should be searchable by name, finding all relevant bits of data   * A stretch goal is to add tags that can be applied to database entries as well, aiding in finding or organizing data ### Site is presented in an inviting and clear way * Goal is to provide intuitive and easy to understand organization through react components * Interface should be easy to navigate and quick to understand * Adding content should have clear methods and interfaces for accomplishing that goal * Finding data that's been created by a user should be a prompt and painless experience, data should be organized and clear to access",
+  "main": "index.js",
+  "scripts": {
+    "heroku-postbuild": "npm run build --prefix frontend",
+    "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
+    "dev:backend": "npm install --prefix backend start",
+    "dev:frontend": "npm install --prefix frontend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edenspring/everBuild.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edenspring/everBuild/issues"
+  },
+  "homepage": "https://github.com/edenspring/everBuild#readme"
+}
