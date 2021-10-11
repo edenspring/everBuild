@@ -10,6 +10,7 @@ function SideBarLand() {
   const sessionUser = useSelector((state) => state.session.user);
   const currentLand = useSelector((state) => state.land.land);
   const currentPlace = useSelector((state) => state.place.place);
+  const [vis, setVis] = useState("hide")
   const [userLands, setUserLands] = useState([]);
   const [expand, setExpand] = useState(false);
   const [display, setDisplay] = useState("none");
@@ -25,7 +26,15 @@ function SideBarLand() {
   // const userLands = useSelector((state) => state.land.userLands)
 
   // console.log(userLands);
-  function iconHover(e) {
+
+  function landExpand (e) {
+    if (vis === "hide") setVis("show")
+    else setVis("hide")
+
+    if (vis === "show") iconShow(e)
+    if (vis === "hide") iconHide(e)
+  }
+  function iconShow(e) {
     const div = e.target.closest(".individual__land");
     const icon = div.querySelector("i");
     const ul = div.querySelector("ul");
@@ -41,7 +50,7 @@ function SideBarLand() {
 
   }
 
-  function iconDepart(e) {
+  function iconHide(e) {
     const div = e.target.closest(".individual__land");
     const icon = div.querySelector("i");
     const ul = div.querySelector("ul");
@@ -63,8 +72,9 @@ function SideBarLand() {
         <div
           key={i}
           className="individual__land sidebar__content"
-          onMouseOver={iconHover}
-          onMouseOut={iconDepart}
+          onClick = {e => landExpand(e)}
+          // onMouseOver={iconShow}
+          // onMouseOut={iconHide}
         >
           <NavLink className="land__link" exact to={`/lands/${e.id}`}>
             <div className="link__container__div">
