@@ -11,6 +11,7 @@ import Lands from "./components/Lands";
 import CreatePlaceForm from "./components/CreatePlaceForm";
 import Places from "./components/Places";
 import Index from "./components/Home";
+import Splash from "./components/Splash";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,11 +23,12 @@ function App() {
 
   return (
     <div className="app__container">
-      <Navigation isLoaded={isLoaded} />
-      <SideBar />
+      <Splash path="/" />
       {isLoaded && (
         <div className="content__container">
+          <Navigation isLoaded={isLoaded} />
           <Switch>
+            <SideBar />
             <Route path="/login">
               <LoginFormPage />
             </Route>
