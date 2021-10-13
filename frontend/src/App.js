@@ -22,7 +22,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="app__container">
+    <>
       <Splash path="/" />
       {isLoaded && (
         <div className="content__container">
@@ -53,7 +53,7 @@ function App() {
           </Switch>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
